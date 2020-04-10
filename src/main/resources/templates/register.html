@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <style>
+        input {
+            margin-left: 50px;
+        }
+        label{
+            margin-left: 50px;
+        }
+        button {
+            margin-left: 150px;
+        }
+    </style>
+</head>
+<body>
+
+<form class="layui-form"  id="f" lay-filter="example">
+    <br>
+    <div class="layui-form-item">
+        <label class="layui-form-label">验证手机:</label>
+        <div class="layui-input-inline">
+            <input id="tel" type="tel" name="tel" lay-verify="" autocomplete="off" class="layui-input"	required="true" onkeyup="value=value.replace(/[^\d]/g,'')" maxlength=11>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">请输入密码:</label>
+        <div class="layui-input-inline">
+            <input type="password" name="pwd" lay-verify="password" placeholder="请输入密码" autocomplete="off" class="layui-input" required="true">
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">验证码:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="inputCode" lay-verify="required"  autocomplete="" class="layui-input" id="code"  required="true">
+        </div>
+    </div>
+    <button type="button" class="layui-btn layui-btn-normal" id="sendVerifyCode"> 获取短信验证码</button>
+    <button type="button" class="layui-btn layui-btn-normal" id="sbm">提交</button>
+
+</form>
+<script type="text/javascript" src="/js/jquery-1.12.4.js"></script>
+<script src="/layui/layui.js"></script>
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        $("#sendVerifyCode").click(function(){
+            var tel = $("#tel").val();//取电话框值
+            $.ajax({
+                url: "/register/sendCode",
+                type: "post",
+                data: {"tel":tel},
+                dataType: "json",
+                success: function (obj) {
+                    if (obj.code == 0) {
+                        layer.alert(obj.msg,{icon:1,time:5000})
+                    }else if(obj.code==-1){
+                        layer.alert(obj.msg,{icon:1,time:5000})
+                    }else if(obj.code==-2){
+                        layer.alert(obj.msg,{icon:1,time:5000})
+                    }
+                },
+                error: function () {
+                    layer.alert("发送失败")
+                }
+            })
+        })
+
+        $("#sbm").click(function () {
+            var tel = $("#tel").val();//取电话框值
+            var pwd = $("input[name=pwd]").val();
+            var inputCode = $("input[name=inputCode]").val();  // 输入的验证码
+            var data={
+                "messageCode":inputCode
+                ,"password":pwd
+                ,"tel":tel
+            }
+            $.ajax({
+                url: '/register/submit',
+                type: "POST",
+                data: data,
+                dataType: "JSON",
+                async: true,
+                success: function (obj) {
+                    //alert(data)
+                    if (obj.code == 0) {
+                        layer.alert(obj.msg,{icon:1,time:2000},function(){
+                            layer.close(layer.index);
+                            window.parent.location.reload();
+                        })
+                    }else if(obj.code==-1){
+                        layer.alert(obj.msg,{icon:2,time:2000},function(){
+                            layer.close(layer.index);
+                        })
+                    }
+                },error:function(){
+                    alert("注册异常")
+                }
+            })
+        })
+    })
+</script>
+</body>
+</html>

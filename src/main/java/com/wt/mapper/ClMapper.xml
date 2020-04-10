@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.wt.mapper.ClMapper">
+  	<select id="selectClass" resultType="com.wt.entity.Cl">
+  		select * from class
+  	</select>
+  	<select id="selectCsName" resultType="String">
+  		SELECT cour.csName FROM class c INNER JOIN coursesystem cour ON c.csId=cour.csId WHERE c.classId=#{classId}
+  	</select>
+	<select id="selectClassId" resultType="Integer">
+		select classId from class where className=#{className}
+	</select>
+	<update id="changePeopleCount">
+		update class set classPeople=classPeople+#{num} where class.classId=#{classId}
+	</update>
+  </mapper>

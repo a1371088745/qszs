@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo" style="font-size: 20px">千硕后台管理系统</div>
+
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:">
+                    <img th:src="@{/photo/{param}(param=${session.user.getImg()})}" class="layui-nav-img">  <!--前面不加/是当前路径，加/是服务器路径-->
+                    <span th:text="${session.user.getUserName()}">游客</span>
+                </a>
+            </li>
+            <li class="layui-nav-item"><a href="">退出登陆</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li shiro:hasRole="admin" class="layui-nav-item layui-nav-itemed">
+                    <a>管理员操作</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/timetable/toScheduling" target="iframe1">排课</a></dd>
+                        <dd><a href="/hisTimetable/toTimetable" target="iframe1">查看所有课表</a></dd>
+                        <dd><a href="/studentInfo/toStudentInfo" target="iframe1">学生信息管理</a></dd>
+                        <dd><a href="">人文类</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:">图书订单</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="">所有订单</a></dd>
+                        <dd><a href="">待完成订单</a></dd>
+                        <dd><a href="">已完成订单</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="">用户管理</a></li>
+                <li class="layui-nav-item"><a href="">权限管理</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <iframe id="iframeMain" name="iframe1" src="" style="width: 100%" height="99%">
+        </iframe>
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © 千硕管理系统 - 底部固定区域
+    </div>
+</div>
+<script src="/layui/layui.js"></script>
+<script type="/text/javascript" src="/js/jquery-1.12.4.js"></script>
+<script>
+
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var element = layui.element;
+
+    });
+</script>
+</body>
+</html>

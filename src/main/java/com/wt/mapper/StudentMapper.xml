@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wt.mapper.StudentMapper">
+    <resultMap id="students" type="Student">
+        <id column="stuId" property="stuId"></id>
+        <result column="stuName" property="stuName"></result>
+        <result column="stuSex" property="stuSex"></result>
+        <result column="stuAge" property="stuAge"></result>
+        <result column="stuTel" property="stuTel"></result>
+        <result column="stuStatus" property="stuStatus"></result>
+        <association property="cl" javaType="Cl">
+            <result column="className" property="className"></result>
+        </association>
+        <association property="group" javaType="Group">
+            <result column="groupName" property="groupName"></result>
+        </association>
+    </resultMap>
+    <select id="findStudents" resultMap="students">
+        select s.stuId,s.stuName,s.stuSex,s.stuAge,c.className,g.groupName,s.stuTel,s.stuStatus from student s left join class c on
+        s.classId=c.classId left join groups g on s.groupId=g.groupId
+        <where>
+            <if test="name!=null">
+                s.stuName like '%${name}%'
+            </if>
+            <if test="className!=null">
+                and c.className=#{className}
+            </if>
+            and s.stuStatus='在读'
+        </where>
+
+    </select>
+
+    <delete id="deleteStu">
+        delete from student where stuId=#{stuId} and stuStatus!='在读'
+    </delete>
+
+    <update id="updateStu">
+        update student s set s.stuName=#{student.stuName},s.stuSex=#{student.stuSex}
+        ,s.stuAge=#{student.stuAge},s.classId=#{student.cl.classId},s.groupId=#{student.group.groupId},s.stuTel=#{student.stuTel},s.stuStatus=#{student.stuStatus}
+        where s.stuId=#{student.stuId}
+    </update>
+
+</mapper>

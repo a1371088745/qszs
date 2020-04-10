@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.wt.mapper.TimeTableMapper">
+  <insert id="insertTb">
+  	insert into timetable(day,date,classroomName,amclassName,amInfo,amTname,pmclassName,pmTname,pmInfo,nightclassName,nightTname,nightInfo) 
+  	values(#{timeTable.day},#{timeTable.date},#{timeTable.classroomName},#{timeTable.amclassName},#{timeTable.amInfo},#{timeTable.amTname},
+  	#{timeTable.pmclassName},#{timeTable.pmTname},#{timeTable.pmInfo},#{timeTable.nightclassName},#{timeTable.nightTname},#{timeTable.nightInfo})
+  </insert>
+   <select id="selectTimeTable" resultType="com.wt.mapper.TimeTableMapper">
+   select * from timeTable <where>
+   <if test="classroomName!=null">
+   	classroomName=#{classroomName}
+   </if>
+   <if test="day!=null">
+   	AND day=#{day}
+   </if>
+   </where>
+   </select>
+  <update id="changeClassRoom">
+  	update timetable set timetable.pmclassName=#{timeTable1.pmclassName},timetable.pmTname=#{timeTable1.pmTname},timetable.pmInfo=#{timeTable1.pmInfo},
+  	timetable.nightclassName=#{timeTable1.nightclassName},timetable.nightTname=#{timeTable1.nightTname},timetable.nightInfo=#{timeTable1.nightInfo} where timetable.day=#{timeTable2.day} and timetable.classroomName=#{timeTable2.classroomName} and timetable.amclassName=#{timeTable2.amclassName};
+  	update timetable set timetable.pmclassName=#{timeTable2.pmclassName},timetable.pmTname=#{timeTable2.pmTname},timetable.pmInfo=#{timeTable2.pmInfo},
+  	timetable.nightclassName=#{timeTable2.nightclassName},timetable.nightTname=#{timeTable2.nightTname},timetable.nightInfo=#{timeTable2.nightInfo} where timetable.day=#{timeTable1.day} and timetable.classroomName=#{timeTable1.classroomName} and timetable.amclassName=#{timeTable1.amclassName}
+  </update>
+  <select id="selectTimeTables" resultType="TimeTable">
+  	SELECT * ,(CASE WHEN timetable.`day`=1 THEN '星期一'
+			    WHEN timetable.`day`=2 THEN '星期二'
+				WHEN timetable.`day`=3 THEN '星期三'
+				WHEN timetable.`day`=4 THEN '星期四'
+				WHEN timetable.`day`=5 THEN '星期五'
+				WHEN timetable.`day`=6 THEN '星期六'
+				WHEN timetable.`day`=7 THEN '星期日'
+				END)
+				weekday FROM timetable where date between #{date1} and #{date2} ORDER BY DAY,classroomId
+  </select>
+  <update id="truncate">
+  	truncate table timetable
+  </update>
+  <update id="updateTimeTable">
+  	update timetable set amclassName=#{timetable.amclassName},amTname=#{timetable.amTname},aminfo=#{timetable.amInfo},pmclassName=#{timetable.pmclassName},pmTname=#{timetable.pmTname},pmInfo=#{timetable.pmInfo},nightclassName=#{timetable.nightclassName},nightTname=#{timetable.nightTname},nightInfo=#{timetable.nightInfo} where date=#{timetable.date} and classroomName=#{timetable.classroomName}
+  </update>
+    <insert id="insertTbs">
+        insert into timetable(day,date,classroomName,amclassName,amInfo,amTname,pmclassName,pmTname,pmInfo,nightclassName,nightTname,nightInfo,classroomId) values
+        <foreach
+            collection="timeTables" item="timeTable" separator=",">
+            (#{timeTable.day},#{timeTable.date},#{timeTable.classroomName},#{timeTable.amclassName},#{timeTable.amInfo},#{timeTable.amTname},
+            #{timeTable.pmclassName},#{timeTable.pmTname},#{timeTable.pmInfo},#{timeTable.nightclassName},#{timeTable.nightTname},#{timeTable.nightInfo},#{timeTable.classroomId})
+        </foreach>
+    </insert>
+  </mapper>

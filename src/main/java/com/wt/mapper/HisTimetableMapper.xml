@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wt.mapper.HisTimetableMapper">
+    <insert id="insertTimetables">
+        insert into timetable2(day,date,classroomName,amclassName,amInfo,amTname,pmclassName,pmTname,pmInfo,nightclassName,nightTname,nightInfo,classroomId) values
+        <foreach
+                collection="timeTables" item="timeTable" separator=",">
+            (#{timeTable.day},#{timeTable.date},#{timeTable.classroomName},#{timeTable.amclassName},#{timeTable.amInfo},#{timeTable.amTname},
+            #{timeTable.pmclassName},#{timeTable.pmTname},#{timeTable.pmInfo},#{timeTable.nightclassName},#{timeTable.nightTname},#{timeTable.nightInfo},#{timeTable.classroomId})
+        </foreach>
+    </insert>
+
+    <select id="findAllTimetables" resultType="TimeTable">
+        select *,(CASE WHEN timetable2.`day`=1 THEN '星期一'
+			    WHEN timetable2.`day`=2 THEN '星期二'
+				WHEN timetable2.`day`=3 THEN '星期三'
+				WHEN timetable2.`day`=4 THEN '星期四'
+				WHEN timetable2.`day`=5 THEN '星期五'
+				WHEN timetable2.`day`=6 THEN '星期六'
+				WHEN timetable2.`day`=7 THEN '星期日'
+				END)
+				weekday from timetable2 where date between #{date1} and #{date2} order by day,classroomId
+    </select>
+</mapper>
