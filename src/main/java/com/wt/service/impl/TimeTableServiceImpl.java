@@ -37,7 +37,7 @@ public class TimeTableServiceImpl implements TimeTableService {
 
 	@Transactional(rollbackFor = {Exception.class})
 	public List<TimeTable> scheduling() {
-		List<Cl> allClass = clMapper.selectClass(); //所有班级的集合
+		List<Cl> allClass = clMapper.selectClass(null,null,null); //所有班级的集合
 		List<ClassRoom> classRooms = classRoomMapper.selectClassRoom();
 		List<Cl> list1 = new ArrayList<Cl>(); //存储人数大于35的班级
 		List<Cl> list2 = new ArrayList<Cl>();//存储人数小于35的班级
@@ -45,8 +45,6 @@ public class TimeTableServiceImpl implements TimeTableService {
 		List<ClassRoom> roomList2 = new ArrayList<ClassRoom>(); //存储大的上课机房
 		List<ClassRoom> roomList3= new ArrayList<ClassRoom>(); //存储大的自习机房
 		List<ClassRoom> roomList4= new ArrayList<ClassRoom>(); //存储小的自习机房
-		int countBig = classRoomMapper.countBig(); //统计大教室数量
-		int countSmall = classRoomMapper.countSmall();//统计小教室数量
 		List<TimeTable> timeTables = new ArrayList<TimeTable>();
 		for (ClassRoom classRoom : classRooms) {
 			if(classRoom.getCrCapacity()>30&&classRoom.getCrCapacity()<=35) {
@@ -67,6 +65,7 @@ public class TimeTableServiceImpl implements TimeTableService {
 				list2.add(cl);
 			}
 			List<Integer> RestDays = requestMapper.selectRestDay(cl.getClassId());  //存储每个班老师请假星期数
+			System.out.println(cl);
 			int StaffId = givenLessonMapper.selectStaffId(cl.getClassId());
 			hashMap.put(StaffId, RestDays); 
 		}
@@ -229,6 +228,11 @@ public class TimeTableServiceImpl implements TimeTableService {
 	@Override
 	public List<TimeTable> selectTimeTables(Date date1,Date date2) {
 		return timeTableMapper.selectTimeTables(date1,date2);
+	}
+
+	@Override
+	public int editTimetable(TimeTable timeTable) {
+		return timeTableMapper.editTimetable(timeTable);
 	}
 
 

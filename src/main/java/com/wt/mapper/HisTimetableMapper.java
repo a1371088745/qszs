@@ -15,4 +15,6 @@ public interface HisTimetableMapper {
     List<TimeTable> findAllTimetables(@Param("date1") Date date1,@Param("date2")Date date2);
 
     List<TimeTable> findAllTimetables(@Param("date1") Date date1,@Param("date2")Date date2,@Param("classNameList") List<String> classNameList);
+
+    int editTimetable(@Param("timeTable") TimeTable timeTable);
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wt.mapper.UserMapper">
+    <resultMap id="userRolePermission" type="User">
+        <id column="userId" property="userId"></id>
+        <result column="userName" property="userName"></result>
+        <result column="userName" property="userName"></result>
+        <result column="userName" property="userName"></result>
+        <result column="userName" property="userName"></result>
+        <result column="userName" property="userName"></result>
+        <result column="userName" property="userName"></result>
+        <collection property="roleList" ofType="Role">
+            <id column="roleId" property="roleId"></id>
+            <result column="roleName" property="roleName"></result>
+            <collection property="permissionList" ofType="Permission">
+                <id column="permissionId" property="permissionId"></id>
+                <id column="permissionName" property="permissionName"></id>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <select id="findUser" resultType="User">
+        select users.* from  users where tel=#{tel}
+    </select>
+    <select id="findRoleAndPermission" resultMap="userRolePermission">
+        SELECT u.*,r.*,p.* FROM users u INNER JOIN userrole ur ON u.userId=ur.userId INNER JOIN role r ON ur.roleId=r.roleId
+        INNER JOIN rolepermission rp ON r.roleId=rp.roleId INNER JOIN permission p ON rp.permissionId=p.permissionId where u.tel=#{tel}
+    </select>
+</mapper>

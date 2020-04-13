@@ -23,4 +23,6 @@ public interface TimeTableMapper {
 	public int updateTimeTable(@Param("timeTable") TimeTable timeTable);
 	//批量插入课表
 	public int insertTbs(@Param("timeTables") List<TimeTable> timeTables);
+
+    int editTimetable(@Param("timeTable") TimeTable timeTable);
 }

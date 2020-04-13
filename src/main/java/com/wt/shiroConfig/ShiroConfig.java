@@ -44,6 +44,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/studentInfo/**","anon");
         filterChainDefinitionMap.put("/group/**","authc");
         filterChainDefinitionMap.put("/cl/**","authc");
+        filterChainDefinitionMap.put("/staff/**","authc");
 
         // 静态资源放行
         filterChainDefinitionMap.put("/image/**", "anon");

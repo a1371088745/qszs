@@ -9,4 +9,6 @@ import java.util.List;
 public interface TimeTableService {
 	List<TimeTable> scheduling();
 	List<TimeTable> selectTimeTables(Date date1, Date date2);
+
+    int editTimetable(TimeTable timeTable);
 }

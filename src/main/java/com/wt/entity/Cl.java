@@ -11,6 +11,24 @@ public class Cl {
     private Integer count3;//轮休数
     private boolean flag;
     private GivenLesson givenLesson;
+    private String csName;
+    private String staffName;
+
+    public String getStaffName() {
+        return staffName;
+    }
+
+    public void setStaffName(String staffName) {
+        this.staffName = staffName;
+    }
+
+    public String getCsName() {
+        return csName;
+    }
+
+    public void setCsName(String csName) {
+        this.csName = csName;
+    }
 
     public int getClassId() {
         return classId;

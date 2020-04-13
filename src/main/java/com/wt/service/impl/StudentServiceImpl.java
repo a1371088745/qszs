@@ -5,6 +5,7 @@ import com.wt.mapper.ClMapper;
 import com.wt.mapper.GroupMapper;
 import com.wt.mapper.StudentMapper;
 import com.wt.service.StudentService;
+import com.wt.util.PageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,8 +20,8 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private GroupMapper groupMapper;
     @Override
-    public List<Student> findStudents(String name,String className) {
-        return studentMapper.findStudents(name,className);
+    public List<Student> findStudents(String name, String className, PageUtils pageUtils) {
+        return studentMapper.findStudents(name,className,pageUtils);
     }
 
     @Override
@@ -40,18 +41,23 @@ public class StudentServiceImpl implements StudentService {
             classId=oldClassId;
         }else{
             classId = clMapper.selectClassId(newStudent.getCl().getClassName());
+            clMapper.changePeopleCount(classId,1);
+            clMapper.changePeopleCount(oldClassId,-1);
         }
         if(newStudent.getGroup().getGroupName()==null||newStudent.getGroup().getGroupName().equals("")){
             groupId=oldGroupId;
         }else{
-            groupId = groupMapper.selectGroupId(newStudent.getGroup().getGroupName(),newStudent.getCl().getClassName());
+            groupId = groupMapper.selectGroupId(newStudent.getGroup().getGroupName(),clMapper.selectClassName(classId));
+            groupMapper.changePeopleCount(groupId,1);
+            groupMapper.changePeopleCount(oldGroupId,-1);
         }
         newStudent.getCl().setClassId(classId);
         newStudent.getGroup().setGroupId(groupId);
-        clMapper.changePeopleCount(classId,1);
-        clMapper.changePeopleCount(oldClassId,-1);
-        groupMapper.changePeopleCount(groupId,1);
-        groupMapper.changePeopleCount(oldGroupId,-1);
         return studentMapper.updateStu(newStudent);
+    }
+
+    @Override
+    public int countStu() {
+        return studentMapper.countStu();
     }
 }

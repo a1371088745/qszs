@@ -4,6 +4,7 @@ import com.wt.entity.JsonData;
 import com.wt.entity.TimeTable;
 import com.wt.service.impl.HisTimetableServiceImpl;
 import com.wt.util.DateUtil;
+import com.wt.util.PageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,5 +50,14 @@ public class HisTimetableController {
 
         List<TimeTable> allTimetables = hisTimetableService.findAllTimetables(parse1, parse2);
         return JsonData.buildSuccess(allTimetables,"查看课表成功");
+    }
+
+    @RequestMapping("/editTimetable")
+    public JsonData editTimetable(TimeTable timeTable){
+        int i = hisTimetableService.editTimetable(timeTable);
+        if(i==0){
+            return JsonData.buildError("更新失败",-1);
+        }
+        return JsonData.buildSuccess(i,0);
     }
 }

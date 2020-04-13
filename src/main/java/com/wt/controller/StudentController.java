@@ -1,15 +1,15 @@
 package com.wt.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.wt.entity.Cl;
 import com.wt.entity.Group;
 import com.wt.entity.JsonData;
 import com.wt.entity.Student;
 import com.wt.service.impl.StudentServiceImpl;
+import com.wt.util.PageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -26,9 +26,17 @@ public class StudentController {
 
     @RequestMapping("/findStudents")
     @ResponseBody
-    public JsonData findAllStudents(String name,String className){
-        List<Student> allStudents = studentService.findStudents(name,className);
-        return JsonData.buildSuccess(allStudents,"查询成功");
+    public String findAllStudents(String name,String className,PageUtils pageUtils){
+        int count=studentService.countStu();
+        pageUtils.setCount(count);
+        pageUtils.setTotalPage(count);
+        List<Student> students = studentService.findStudents(name, className, pageUtils);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("code",0);
+        jsonObject.put("msg","分页数据");
+        jsonObject.put("count",count);
+        jsonObject.put("data",students);
+        return jsonObject.toString();
     }
 
     @RequestMapping("/delStu")

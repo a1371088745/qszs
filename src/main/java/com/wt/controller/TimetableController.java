@@ -58,4 +58,13 @@ public class TimetableController {
         List<TimeTable> timeTables = timeTableService.selectTimeTables(parse1,parse2);
         return JsonData.buildSuccess(timeTables);
     }
+
+    @RequestMapping("/editTimetable")
+    public JsonData editTimetable(TimeTable timeTable){
+        int i = timeTableService.editTimetable(timeTable);
+        if(i==0){
+            return JsonData.buildError("更新失败",-1);
+        }
+        return JsonData.buildSuccess(i,0);
+    }
 }

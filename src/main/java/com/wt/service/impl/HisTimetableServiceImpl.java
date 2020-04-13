@@ -21,4 +21,8 @@ public class HisTimetableServiceImpl implements HisTimetableService {
     public List<TimeTable> findAllTimetables(Date date1, Date date2) {
         return hisTimetableMapper.findAllTimetables(date1,date2);
     }
+
+    public int editTimetable(TimeTable timeTable) {
+       return hisTimetableMapper.editTimetable(timeTable);
+    }
 }

@@ -11,4 +11,6 @@ public interface HisTimetableService {
     public int insertTimetables(List<TimeTable> timeTables);
 
     List<TimeTable> findAllTimetables(Date date1,Date date2);
+
+    public int editTimetable(TimeTable timeTable);
 }

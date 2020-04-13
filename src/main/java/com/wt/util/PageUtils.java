@@ -5,42 +5,45 @@ import java.util.List;
 
 public class PageUtils {
 	
-	private int currentPage;
-	private int pageSize;
+	private int page;
+	private int limit;
 	private int totalPage;
 	private int count;
 	private List list = new ArrayList<>();
 	
-	public int getCurrentPage() {
-		return currentPage;
+	public int getPage() {
+		return page;
 	}
-	public void setCurrentPage(String currentPage) {
+	public void setPage(String currentPage) {
 		if(currentPage == null) {
-			this.currentPage = 1;
+			this.page = 1;
 		}else {
 			if(Integer.parseInt(currentPage)<1) {
-				this.currentPage = 1;
+				this.page = 1;
 			}else if(Integer.parseInt(currentPage)>totalPage) {
-				this.currentPage = this.totalPage;
+				this.page = this.totalPage;
 			}else{
-				this.currentPage = Integer.parseInt(currentPage);
+				this.page = Integer.parseInt(currentPage);
 			}
 		}
 	}
-	public int getPageSize() {
-		return pageSize;
+	public  void setPage(int page){
+		this.page=page;
 	}
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
+	public int getLimit() {
+		return limit;
+	}
+	public void setLimit(int limit) {
+		this.limit = limit;
 	}
 	public int getTotalPage() {
 		return totalPage;
 	}
 	public void setTotalPage(int count) {
-		if(count%this.pageSize == 0) {
-			this.totalPage = count/this.pageSize;
+		if(count%this.limit == 0) {
+			this.totalPage = count/this.limit;
 		}else {
-			this.totalPage = count/this.pageSize+1;
+			this.totalPage = count/this.limit+1;
 		}
 		this.totalPage = totalPage;
 	}

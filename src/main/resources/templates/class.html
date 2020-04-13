@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <title>Insert title here</title>
+</head>
+<body>
+
+<div class="demoTable">
+    班级名搜索：
+    <div class="layui-inline">
+        <input class="layui-input" name="clName" id="clName" autocomplete="off">
+    </div>
+    <button class="layui-btn search" data-type="reload" id="searchCl">班级名搜索</button>
+
+    老师名搜索：
+    <div class="layui-inline">
+        <input class="layui-input" name="staffName" id="staffName" autocomplete="off">
+    </div>
+    <button class="layui-btn" id="searchStaff">老师名搜索</button>
+</div>
+
+<!--添加弹出层 -->
+<table class="layui-hide" id="test" lay-filter="test"></table>
+<div style="display:none;padding: 3px" id="addCl">
+    <form class="layui-form layui-form-pane"  lay-filter="change" id="clForm">
+        <div class="layui-form-item">
+            <div class="layui-inline" lay-filter="myDiv">
+                <label class="layui-form-label">班级类型</label>
+                <div class="layui-input-inline">
+                    <select name="classType" id="classType" lay-filter="selectType">
+                        <option>请选择</option>
+                        <option value="JAVA">JAVA</option>
+                        <option value="UI">UI</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">班级名称</label>
+                <div class="layui-input-inline">
+                    <input name="className" autocomplete="off" class="layui-input" type="text" id="className">
+                </div>
+            </div>
+            <div class="layui-inline" lay-filter="myDiv">
+                <label class="layui-form-label">教员</label>
+                <div class="layui-input-inline">
+                    <select name="teachers" id="teachers" lay-filter="select1">
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: center;">
+            <button type="button" class="layui-btn" id="submitCl"><span class='layui-icon'>&#xe609;</span>提交</button>
+        </div>
+    </form>
+</div>
+
+<button type="button" class="layui-btn layui-btn-normal" id="addStu" >添加班级</button>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="add">添加学生</a>
+</script>
+<script src="/layui/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script type="text/javascript" src="/js/jquery-1.12.4.js"></script>
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+        var tableIns=table.render({
+            elem: '#test'
+            ,url:'/cl/selectCl'
+            ,title: '用户数据表'
+            ,cols: [
+                [
+                {type: 'checkbox', fixed: 'left'}
+                ,{field:'classId', title:'ID',hide:true, width:80, fixed: 'left', unresize: true, sort: true}
+                ,{field:'className', title:'班级', width:170, }
+                ,{field:'classPeople', title:'人数', width:200,sort: true}
+                ,{field:'staffName', title:'授课老师', width:250}
+                ,{field:'csName', title:'课程进度', width:250}
+                ,{field:'classStatus', title:'状态', width:230,  }
+                ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:200}
+            ]
+            ]
+            ,id: 'testReload'
+            ,limits: [10,20,30]  //每页条数的选择项，默认：[10,20,30,40,50,60,70,80,90]。
+            ,limit: 10 //每页默认显示的数量
+            ,page: true
+        });
+
+        //模糊查询
+        $('#searchCl').click(function(){
+            var name = $('#clName').val()
+            tableIns.reload({
+                url: '/cl/selectCl?name='+name,
+            });
+        });
+
+        $('#searchStaff').click(function(){
+            var staffName = $('#staffName').val()
+            tableIns.reload({
+                url: '/cl/selectCl?staffName='+staffName,
+            });
+        });
+        //添加班级
+        $("#addStu").click(function () {
+            layer.open({
+                type:"1",
+                title:"添加班级",
+                skin: 'layui-layer-molv', //加上边框
+                area: ['50%', '28%'], //宽高
+                content:$("#addCl"),
+                success: function () {
+                    var classType="JAVA"
+                    var staffName=''
+                    layui.form.on('select(selectType)',function(data){
+                        classType=data.value;
+                        $.ajax({
+                            url:"/staff/findTeachers",
+                            type:"post",
+                            dataType:"json",
+                            data:{"classType":classType},
+                            success:function (msg) {
+                                $("#teachers").empty()
+                                let ele=$("<option>请选择</option>")
+                                ele.attr('value',null)
+                                $("#teachers").append(ele)
+                                for(var i=0;i<msg.data.length;i++){
+                                    let ele=$("<option></option>")
+                                    ele.attr('value',msg.data[i].staffName)
+                                    ele.text(msg.data[i].staffName)
+                                    $("#teachers").append(ele)
+                                }
+                                layui.use('form', function(){
+                                    layui.form.render("select");
+                                })
+                            }
+                        })
+                        layui.form.on('select(select1)',function(data){
+                             staffName=data.value;
+                        });
+                    });
+                    $("#submitCl").click(function () {
+                        var className=$("#className").val()
+                        $.ajax({
+                            url:"/cl/addClass",
+                            data:{"className":className,"staffName":staffName},
+                            dataType:"json",
+                            type:"post",
+                            success:function (msg) {
+                                if(msg.code===0){
+                                    alert(msg.msg)
+                                    if(!confirm("是否继续添加?")){
+                                        location.reload()
+                                    }
+                                }else{
+                                    alert(msg.msg)
+                                }
+                            },
+                            error:function () {
+                                alert("添加错误")
+                            }
+                        })
+                    })
+                }
+
+            })
+        })
+        //监听行工具事件
+        table.on('tool(test)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'del'){
+                layer.confirm('真的删除行么', function(DeleteStaff){
+
+                    $.ajax({
+                        url:"",
+                        type:"POST",
+                        data:{"classId":data.classId},
+                        dataType: "json",
+                        success: function(data){
+                            if(data==1){
+                                obj.del();
+
+                                /*  layer.close(index); */
+                                layer.msg("删除成功", {icon: 6});
+                            }else{
+                                layer.msg("该班级是在读状态，不能失败", {icon: 5});
+                            }
+                        }
+                    });
+                })
+            }  else if(obj.event === 'edit'){
+                $("#update").css("display","inline");
+
+                var allClass = $("#cnn").find("option:selected").text();
+                $("#cnn").empty();
+                $.ajax({
+                    url:"",
+                    type:"POST",
+                    data:'allClass='+allClass,
+                    dataType:"JSON",
+                    success:function(msg){
+                        if(msg != null){
+                            for(var i in msg){
+                                if(msg[i].staffName===data.staff.staffName){
+                                    $("#cnn").append("<option style='width:150px;' id='cnn' selected='selected'>"+msg[i].staffName+"</option>");
+                                }else{
+                                    $("#cnn").append("<option style='width:150px;' id='cnn'>"+msg[i].staffName+"</option>");
+                                }
+                            }
+                        }
+                    },
+                    error:function(){
+                        alert("错啦！");
+                    }
+                })
+                $(".updeta_name").val(data.className)
+                var vdefault2 = $('.updeta_name').val();
+                $('.updeta_name').focus(function() {
+                    //获得焦点时，如果值为默认值，则设置为空  
+                    if ($(this).val() == vdefault2) {
+                        $(this).val("");
+                    }
+                });
+                $('.updeta_name').blur(function() {
+                    //失去焦点时，如果值为空，则设置为默认值  
+                    if ($(this).val()== "") {
+                        $(this).val(vdefault2);
+                    }
+                });
+
+                $("#sub").on("click", function(){
+
+                    var data1 = {};
+                    $('#update').css("display","none");
+                    data1.id=data.classId;
+                    data1.name = $(".updeta_name").val();
+                    data1.status=$("#cn").find("option:selected").text();
+                    data1.staffName=$("#cnn").find("option:selected").text();
+                    $.ajax({
+                        url:"",
+                        type:"POST",
+                        data:data1,
+                        dataType: "text",
+                        success: function(data2){
+                            /*  if(data2==1){
+                                 obj.del();
+                               console.log(data2);
+
+                                alert("修改成功");
+                                 layer.msg("修改成功", {icon: 6});
+                             }else{
+                               console.log(data2);
+                                 layer.msg("修改失败", {icon: 5});
+                             } */
+                        }
+                    })
+                });
+
+            }
+        });
+
+
+        $('.c').on('click', function(){
+            $('#update').css("display","none");
+            $('#add').css("display","none");
+        });
+
+        // 刷新表格
+        $('#btn-refresh').on('click', function () {
+            tableIns.reload()
+        });
+    });
+
+</script></body>
+</html>
