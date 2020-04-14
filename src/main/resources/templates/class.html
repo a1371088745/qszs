@@ -21,8 +21,9 @@
     <button class="layui-btn" id="searchStaff">老师名搜索</button>
 </div>
 
-<!--添加弹出层 -->
+
 <table class="layui-hide" id="test" lay-filter="test"></table>
+<!--添加弹出层 -->
 <div style="display:none;padding: 3px" id="addCl">
     <form class="layui-form layui-form-pane"  lay-filter="change" id="clForm">
         <div class="layui-form-item">
@@ -55,6 +56,47 @@
         </div>
     </form>
 </div>
+<!--添加学生弹出层 -->
+<table class="layui-hide" id="t" lay-filter="test"></table>
+<div style="display:none;padding: 3px" id="addStuInfo">
+    <form class="layui-form layui-form-pane" lay-filter="change" id="stuInfoForm">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">姓名</label>
+                <div class="layui-input-inline">
+                    <input name="stuName"
+                           autocomplete="off" class="layui-input" type="text" id="name">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">性别</label>
+                <div class="layui-input-inline">
+                    <input name="stuSex"  autocomplete="off"
+                           class="layui-input" type="text" id="sex">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">年龄</label>
+                <div class="layui-input-inline">
+                    <input name="stuAge"  autocomplete="off"
+                           class="layui-input" type="text" id="age">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">联系电话</label>
+                <div class="layui-input-inline">
+                    <input name="stuTel"  autocomplete="off"
+                           class="layui-input" type="text" id="tel">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: center;">
+            <button type="button" class="layui-btn" id="submit"><span class='layui-icon'>&#xe609;</span>提交</button>
+        </div>
+    </form>
+</div>
+
+
 
 <button type="button" class="layui-btn layui-btn-normal" id="addStu" >添加班级</button>
 <script type="text/html" id="barDemo">
@@ -105,7 +147,7 @@
             });
         });
         //添加班级
-        $("#addStu").click(function () {
+       $("#addStu").click(function () {
             layer.open({
                 type:"1",
                 title:"添加班级",
@@ -168,21 +210,19 @@
 
             })
         })
-        //监听行工具事件
+        //修改班级
         table.on('tool(test)', function(obj){
             var data = obj.data;
             if(obj.event === 'del'){
-                layer.confirm('真的删除行么', function(DeleteStaff){
-
+                layer.confirm('真的删除该班级么', function(){
                     $.ajax({
-                        url:"",
+                        url:"/cl/delClass",
                         type:"POST",
                         data:{"classId":data.classId},
                         dataType: "json",
-                        success: function(data){
-                            if(data==1){
+                        success: function(msg){
+                            if(msg.code==0){
                                 obj.del();
-
                                 /*  layer.close(index); */
                                 layer.msg("删除成功", {icon: 6});
                             }else{
@@ -192,73 +232,97 @@
                     });
                 })
             }  else if(obj.event === 'edit'){
-                $("#update").css("display","inline");
-
-                var allClass = $("#cnn").find("option:selected").text();
-                $("#cnn").empty();
-                $.ajax({
-                    url:"",
-                    type:"POST",
-                    data:'allClass='+allClass,
-                    dataType:"JSON",
-                    success:function(msg){
-                        if(msg != null){
-                            for(var i in msg){
-                                if(msg[i].staffName===data.staff.staffName){
-                                    $("#cnn").append("<option style='width:150px;' id='cnn' selected='selected'>"+msg[i].staffName+"</option>");
-                                }else{
-                                    $("#cnn").append("<option style='width:150px;' id='cnn'>"+msg[i].staffName+"</option>");
+                layer.open({
+                    type: "1",
+                    title: "修改班级",
+                    skin: 'layui-layer-molv', //加上边框
+                    area: ['50%', '28%'], //宽高
+                    content: $("#addCl"),
+                    success:function () {
+                        var classType="JAVA"
+                        var staffName=''
+                        $("#className").val(data.className)
+                        layui.form.on('select(selectType)',function(data){
+                            classType=data.value;
+                            $.ajax({
+                                url:"/staff/findTeachers",
+                                type:"post",
+                                dataType:"json",
+                                data:{"classType":classType},
+                                success:function (msg) {
+                                    $("#teachers").empty()
+                                    let ele=$("<option>请选择</option>")
+                                    ele.attr('value',null)
+                                    $("#teachers").append(ele)
+                                    for(var i=0;i<msg.data.length;i++){
+                                        let ele=$("<option></option>")
+                                        ele.attr('value',msg.data[i].staffName)
+                                        ele.text(msg.data[i].staffName)
+                                        $("#teachers").append(ele)
+                                    }
+                                    layui.use('form', function(){
+                                        layui.form.render("select");
+                                    })
                                 }
-                            }
-                        }
-                    },
-                    error:function(){
-                        alert("错啦！");
+                            })
+                            layui.form.on('select(select1)',function(data){
+                                staffName=data.value;
+                            });
+                        });
+                        $("#submitCl").click(function () {
+                            var classId=data.classId
+                            var className=$("#className").val()
+                            $.ajax({
+                                url:"/cl/updateCl",
+                                data:{"classId":classId,"className":className,"staffName":staffName},
+                                type:"post",
+                                dataType:"json",
+                                success:function (msg) {
+                                    if(msg.code==0){
+                                        alert("修改成功")
+                                        location.reload()
+                                    }
+                                },
+                                error:function () {
+                                    alert("修改失败")
+                                }
+                            })
+                        })
                     }
                 })
-                $(".updeta_name").val(data.className)
-                var vdefault2 = $('.updeta_name').val();
-                $('.updeta_name').focus(function() {
-                    //获得焦点时，如果值为默认值，则设置为空  
-                    if ($(this).val() == vdefault2) {
-                        $(this).val("");
+
+            }else if(obj.event==='add'){
+                layer.open({
+                    type: "1",
+                    title: "修改班级",
+                    skin: 'layui-layer-molv', //加上边框
+                    area: ['50%', '28%'], //宽高
+                    content: $("#addStuInfo"),
+                    success:function () {
+                        $("#submit").click(function () {
+                            var student=$("#stuInfoForm").serialize()
+                            var classId=data.classId
+                            var param=$.param({"classId":classId})+"&"+student
+                            $.ajax({
+                                url:"/studentInfo/addStu",
+                                data:param,
+                                type:"post",
+                                dataType:"json",
+                                success:function (msg) {
+                                    if(msg.code==0){
+                                        alert(msg.msg)
+                                        if(!confirm("是否继续添加?")){
+                                            location.reload()
+                                        }
+                                    }
+                                },
+                                error:function () {
+                                        alert("添加学生失败")
+                                }
+                            })
+                        })
                     }
-                });
-                $('.updeta_name').blur(function() {
-                    //失去焦点时，如果值为空，则设置为默认值  
-                    if ($(this).val()== "") {
-                        $(this).val(vdefault2);
-                    }
-                });
-
-                $("#sub").on("click", function(){
-
-                    var data1 = {};
-                    $('#update').css("display","none");
-                    data1.id=data.classId;
-                    data1.name = $(".updeta_name").val();
-                    data1.status=$("#cn").find("option:selected").text();
-                    data1.staffName=$("#cnn").find("option:selected").text();
-                    $.ajax({
-                        url:"",
-                        type:"POST",
-                        data:data1,
-                        dataType: "text",
-                        success: function(data2){
-                            /*  if(data2==1){
-                                 obj.del();
-                               console.log(data2);
-
-                                alert("修改成功");
-                                 layer.msg("修改成功", {icon: 6});
-                             }else{
-                               console.log(data2);
-                                 layer.msg("修改失败", {icon: 5});
-                             } */
-                        }
-                    })
-                });
-
+                })
             }
         });
 

@@ -60,4 +60,9 @@ public class StudentServiceImpl implements StudentService {
     public int countStu() {
         return studentMapper.countStu();
     }
+
+    @Override
+    public Integer addStu(Student stu,Integer classId) {
+        return studentMapper.addStu(stu,classId);
+    }
 }

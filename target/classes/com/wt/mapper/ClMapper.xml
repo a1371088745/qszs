@@ -9,7 +9,7 @@
 		FROM class cl LEFT JOIN coursesystem cs ON cl.csId=cs.csId LEFT JOIN givelessons g ON cl.classId=g.classId
 		LEFT JOIN staff s ON g.staffId=s.staffId
 		<where>
-		cl.classId>0
+		cl.classId>0 and cl.classStatus='在校'
 		<if test="name!=null">
 			and cl.className like '%${name}%'
 		</if>
@@ -34,9 +34,15 @@
 		update class set classPeople=classPeople+#{num} where class.classId=#{classId}
 	</update>
 	<select id="countClass" resultType="Integer">
-		select count(classId) from class
+		select count(classId) from class where classStatus='在校'
 	</select>
 	<insert id="addClass" useGeneratedKeys="true" keyProperty="classId" parameterType="String">
 		insert into class(className) values (#{cl.className})
 	</insert>
+	<update id="graduateClass">
+		update class set classStatus="毕业" where classId=#{cl.classId} and classStatus="在校"
+	</update>
+	<update id="updateCl">
+		update class set className=#{cl.className} where classId=#{cl.classId}
+	</update>
   </mapper>

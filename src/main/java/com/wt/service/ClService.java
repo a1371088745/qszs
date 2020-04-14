@@ -10,4 +10,8 @@ public interface ClService {
     public Integer countClass();
 
      public Integer addClass(Cl cl) throws Exception;
+
+    public Integer delClass(Cl cl);
+
+    public Integer updateCl(Cl cl);
 }

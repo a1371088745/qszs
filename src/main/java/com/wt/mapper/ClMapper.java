@@ -23,4 +23,8 @@ public interface ClMapper {
 	public Integer countClass();
 	//添加班级
 	public Integer addClass(@Param("cl") Cl cl);
+
+    public Integer graduateClass(@Param("cl") Cl cl);
+
+	public Integer updateCl(@Param("cl") Cl cl);
 }

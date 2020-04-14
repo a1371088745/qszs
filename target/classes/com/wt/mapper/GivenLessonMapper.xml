@@ -10,4 +10,7 @@
   <insert id="addGivenLesson">
       insert into givelessons(staffId,classId) values (#{staffId},#{classId})
   </insert>
+  <update id="update">
+    update givelessons set staffId=#{staffId} where classId=#{classId}
+  </update>
   </mapper>

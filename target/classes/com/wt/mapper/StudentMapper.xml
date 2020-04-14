@@ -49,4 +49,11 @@
         select count(stuId) from student where stuStatus='在读'
     </select>
 
+    <update id="graduate">
+        update student set stuStatus='毕业' where classId=#{classId}
+    </update>
+    <insert id="addStu">
+        insert into student(stuName,stuSex,stuAge,classId,stuTel) values(#{stu.stuName},#{stu.stuSex},#{stu.stuAge},#{classId},#{stu.stuTel})
+    </insert>
+
 </mapper>

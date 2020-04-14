@@ -52,4 +52,21 @@ public class ClController {
         return JsonData.buildSuccess("","添加成功");
     }
 
+    @RequestMapping("/delClass")
+    @ResponseBody
+    public JsonData delClass(Cl cl){
+        Integer integer = clService.delClass(cl);
+        if(integer==-1){
+            return JsonData.buildError("该班级不存在");
+        }
+        return JsonData.buildSuccess("删除成功");
+    }
+
+    @RequestMapping("/updateCl")
+    @ResponseBody
+    public JsonData updateCl(Cl cl){
+        Integer integer = clService.updateCl(cl);
+        return JsonData.buildSuccess(integer,"修改成功");
+    }
+
 }

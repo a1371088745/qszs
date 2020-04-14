@@ -75,4 +75,11 @@ public class StudentController {
         }
         return  JsonData.buildSuccess("修改成功");
     }
+
+    @RequestMapping("/addStu")
+    @ResponseBody
+    public JsonData addStu(Student stu,Integer classId){
+        Integer integer = studentService.addStu(stu, classId);
+        return  JsonData.buildSuccess(integer,"添加学生成功");
+    }
 }

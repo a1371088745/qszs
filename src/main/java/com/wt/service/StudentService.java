@@ -15,4 +15,6 @@ public interface StudentService {
     public Integer UpdateStu( Student newStudent,String oldGroupName, String oldClassName);
 
     int countStu();
+
+    public Integer addStu(Student stu,Integer classId);
 }
