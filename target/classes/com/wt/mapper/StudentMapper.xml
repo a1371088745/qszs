@@ -55,5 +55,11 @@
     <insert id="addStu">
         insert into student(stuName,stuSex,stuAge,classId,stuTel) values(#{stu.stuName},#{stu.stuSex},#{stu.stuAge},#{classId},#{stu.stuTel})
     </insert>
+    <select id="findStudentsByStaffTel" resultMap="students">
+        select s.stuId,s.stuName,s.stuSex,s.stuAge,c.className,g.groupName,s.stuTel,s.stuStatus from staff sta inner join
+        givelessons gi on sta.staffId=gi.staffId inner join class c on gi.classId=c.classId inner join student s on c.classId=s.classId
+        inner join groups g on s.groupId=g.groupId
+        where sta.staffTel=#{staffTel}
+    </select>
 
 </mapper>

@@ -45,4 +45,8 @@
 	<update id="updateCl">
 		update class set className=#{cl.className} where classId=#{cl.classId}
 	</update>
+
+	<select id="selectClByStaffTel" resultType="Cl">
+		select c.* from staff s inner join givelessons g on s.staffId=g.staffId inner join class c on g.classId=c.classId where s.staffTel=#{tel} and c.classStatus='在校'
+	</select>
   </mapper>

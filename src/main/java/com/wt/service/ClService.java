@@ -14,4 +14,6 @@ public interface ClService {
     public Integer delClass(Cl cl);
 
     public Integer updateCl(Cl cl);
+
+    public List<Cl> selectClByStaffTel(String tel);
 }

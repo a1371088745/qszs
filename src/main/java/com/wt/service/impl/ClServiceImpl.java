@@ -68,4 +68,9 @@ public class ClServiceImpl implements ClService {
         return 0;
     }
 
+    @Override
+    public List<Cl> selectClByStaffTel(String tel) {
+        return clMapper.selectClByStaffTel(tel);
+    }
+
 }

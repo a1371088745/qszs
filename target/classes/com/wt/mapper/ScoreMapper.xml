@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wt.mapper.ScoreMapper">
+    <select id="findScore" resultType="com.wt.vo.StudentScoreVo">
+        select stu.stuId,stu.stuName,stu.stuSex,stu.stuAge,stu.stuTel,sc.number,sc.score from student stu left join score sc
+        on stu.stuId=sc.stuId inner join  class c on stu.classId=c.classId where c.className=#{className} and sc.number=#{count}
+    </select>
+</mapper>

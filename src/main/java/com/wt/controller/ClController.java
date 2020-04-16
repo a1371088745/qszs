@@ -3,6 +3,7 @@ package com.wt.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.wt.entity.Cl;
 import com.wt.entity.JsonData;
+import com.wt.entity.User;
 import com.wt.service.impl.ClServiceImpl;
 import com.wt.util.PageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -29,7 +31,9 @@ public class ClController {
         JSONObject jsonObject = new JSONObject();
         int count=clService.countClass();
         pageUtils.setCount(count);
-        pageUtils.setTotalPage(count);
+        if(pageUtils.getLimit()==0){
+            pageUtils=null;
+        }
         List<Cl> cls = clService.selectClass(pageUtils,name,staffName);
         if(cls==null){
             jsonObject.put("msg","查询无学生");
@@ -40,6 +44,14 @@ public class ClController {
         jsonObject.put("count",count);
         jsonObject.put("data",cls);
         return jsonObject;
+    }
+
+    @RequestMapping("/selectClByStaff")
+    @ResponseBody
+    public JsonData selectClByStaff(HttpSession session){
+        User user= (User) session.getAttribute("user");
+        List<Cl> cls = clService.selectClByStaffTel(user.getTel());
+        return  JsonData.buildSuccess(cls,"查询成功");
     }
 
     @RequestMapping("/addClass")

@@ -23,8 +23,10 @@ public interface ClMapper {
 	public Integer countClass();
 	//添加班级
 	public Integer addClass(@Param("cl") Cl cl);
-
+	//班级状态变为毕业
     public Integer graduateClass(@Param("cl") Cl cl);
-
+    //更新班级信息
 	public Integer updateCl(@Param("cl") Cl cl);
+	//根据老师电话查询所教班级
+	public List<Cl> selectClByStaffTel(@Param("tel") String tel);
 }

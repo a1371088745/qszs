@@ -17,4 +17,6 @@ public interface StudentService {
     int countStu();
 
     public Integer addStu(Student stu,Integer classId);
+
+    List<Student> findStudentsByStaffTel(String staffTel);
 }

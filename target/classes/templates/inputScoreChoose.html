@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选择录入分数班级</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/layui/css/layui.css"  media="all">
+</head>
+<body>
+<form class="layui-form layui-form-pane"  lay-filter="change" id="stuInfoForm" style="text-align: center;padding-top:300px">
+<div class="layui-form-item">
+<div class="layui-inline" lay-filter="myDiv">
+<label class="layui-form-label">班级</label>
+<div class="layui-input-inline">
+    <select name="classifyClass" id="classifyClass" lay-filter="select1">
+        <option id="firstClass"></option>
+    </select>
+</div>
+</div>
+    <div class="layui-inline" lay-filter="myDiv">
+        <label class="layui-form-label">次数</label>
+        <div class="layui-input-inline">
+            <select name="count" id="count" lay-filter="select2">
+                <option value="0">请选择</option>
+                <option value="1">第一次成绩</option>
+                <option value="2">第二次成绩</option>
+                <option value="3">第三次成绩</option>
+                <option value="4">第四次成绩</option>
+            </select>
+        </div>
+</div>
+</div>
+    <div class="layui-form-item" style="text-align: center;">
+        <button type="button" class="layui-btn" id="submit"><span class='layui-icon'>&#xe609;</span>确定</button>
+    </div>
+</form>
+
+<script src="/layui/layui.all.js" charset="utf-8"></script>
+<script>
+    var $=layui.$
+    $.ajax({
+        url:"/cl/selectClByStaff",
+        type:"post",
+        dataType:"json",
+        success:function (msg) {
+            if(msg.data.length!=0){
+                for(var i=0;i<msg.data.length;i++){
+                        let ele=$("<option></option>")
+                        $("#classifyClass").append(ele)
+                        ele.attr('value',msg.data[i].className)
+                        ele.text(msg.data[i].className)
+                }
+            }
+            layui.use('form', function(){
+                layui.form.render("select");
+            })
+        }
+    })
+    var className=''
+    layui.form.on('select(select1)',function (data) {
+        alert(data.value)
+        className=data.value;
+    })
+    var count=0;
+    layui.form.on('select(select2)',function (data) {
+        count=data.value
+    })
+    $("#submit").click(function () {
+        alert(className)
+        alert(count)
+        window.location.href='/score/findScore?className='+className+"&count="+count;
+    })
+</script>
+</body>
+</html>

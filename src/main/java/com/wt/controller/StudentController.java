@@ -1,10 +1,7 @@
 package com.wt.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.wt.entity.Cl;
-import com.wt.entity.Group;
-import com.wt.entity.JsonData;
-import com.wt.entity.Student;
+import com.wt.entity.*;
 import com.wt.service.impl.StudentServiceImpl;
 import com.wt.util.PageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -24,6 +22,10 @@ public class StudentController {
         return "studentInfo";
     }
 
+    @RequestMapping("/toStudentInfoForStaff")
+    public String toStudentInfoForStaff(){
+        return "studentInfoForStaff";
+    }
     @RequestMapping("/findStudents")
     @ResponseBody
     public String findAllStudents(String name,String className,PageUtils pageUtils){
@@ -37,6 +39,17 @@ public class StudentController {
         jsonObject.put("count",count);
         jsonObject.put("data",students);
         return jsonObject.toString();
+    }
+
+    @RequestMapping("findStudentsByStaff")
+    @ResponseBody
+    public JsonData findStudentsByStaff(HttpSession session){
+        User user = (User) session.getAttribute("user");
+        List<Student> studentsByStaffTel = studentService.findStudentsByStaffTel(user.getTel());
+        if(studentsByStaffTel==null){
+            return JsonData.buildError("查询失败");
+        }
+        return JsonData.buildSuccess(studentsByStaffTel,"查询成功");
     }
 
     @RequestMapping("/delStu")

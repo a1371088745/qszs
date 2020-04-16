@@ -33,7 +33,7 @@ public class PageUtils {
 	public int getLimit() {
 		return limit;
 	}
-	public void setLimit(int limit) {
+	public void setLimit(Integer limit) {
 		this.limit = limit;
 	}
 	public int getTotalPage() {

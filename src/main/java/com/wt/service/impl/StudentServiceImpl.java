@@ -65,4 +65,9 @@ public class StudentServiceImpl implements StudentService {
     public Integer addStu(Student stu,Integer classId) {
         return studentMapper.addStu(stu,classId);
     }
+
+    @Override
+    public List<Student> findStudentsByStaffTel(String staffTel) {
+        return studentMapper.findStudentsByStaffTel(staffTel);
+    }
 }
