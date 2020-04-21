@@ -7,4 +7,7 @@
         select stu.stuId,stu.stuName,stu.stuSex,stu.stuAge,stu.stuTel,sc.number,sc.score from student stu left join score sc
         on stu.stuId=sc.stuId inner join  class c on stu.classId=c.classId where c.className=#{className} and sc.number=#{count}
     </select>
+    <update id="addScore">
+        update score set score=#{score} where stuId=#{stuId} and number=#{count}
+    </update>
 </mapper>

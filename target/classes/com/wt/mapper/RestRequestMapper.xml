@@ -6,4 +6,16 @@
   <select id="selectRestDay" resultType="Integer">
   	SELECT r.day FROM restrequest r INNER JOIN givelessons g ON r.`staffId`=g.`staffId` WHERE g.`classId`=#{classId}
   </select>
+    <select id="selectRestRequestByStaffName" resultType="com.wt.vo.RestRequestVo">
+        select r.restId,s.staffName,r.nowdate,r.restdate,r.requestStatus,(CASE WHEN r.requestStatus=0 THEN '已通过'
+				WHEN r.requestStatus=1 THEN '未通过'
+				WHEN r.requestStatus=2 THEN '待处理'
+				END) formatStatus,r.day,r.reason from restrequest r inner join staff s on r.staffId=s.staffId order by r.requestStatus desc
+    </select>
+    <insert id="addRequest">
+        insert into restrequest(staffId,nowdate,restdate,requestStatus,day,reason) values (#{staffId},#{restRequestVo.nowDate},#{restRequestVo.restDate},2,#{restRequestVo.day},#{restRequestVo.reason})
+    </insert>
+    <delete id="restRequestWithdraw">
+        delete from restrequest where restId=#{restId}
+    </delete>
   </mapper>

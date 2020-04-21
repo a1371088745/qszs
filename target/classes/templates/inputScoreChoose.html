@@ -59,7 +59,6 @@
     })
     var className=''
     layui.form.on('select(select1)',function (data) {
-        alert(data.value)
         className=data.value;
     })
     var count=0;
@@ -67,9 +66,7 @@
         count=data.value
     })
     $("#submit").click(function () {
-        alert(className)
-        alert(count)
-        window.location.href='/score/findScore?className='+className+"&count="+count;
+        window.location.href="/score/toScore?className="+className+"&count="+count;
     })
 </script>
 </body>

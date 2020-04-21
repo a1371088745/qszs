@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+</head>
+<body>
+<form class="layui-form" id="restForm">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">姓名</label>
+        <div class="layui-input-inline">
+            <input type="text" name="staffName" lay-verify="required"placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">请假日期</label>
+        <div class="layui-input-inline">
+            <input type="date" name="restDate" lay-verify="required"  autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">请假原因</label>
+        <div class="layui-input-block">
+            <textarea name="reason" placeholder="请输入内容" class="layui-textarea" style="width: 300px"></textarea>
+        </div>
+    </div>
+    <!-- 代++++
+
+
+     -->
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" id="submit">立即提交</button>
+        </div>
+    </div>
+</form>
+<table class="layui-hide" id="test" lay-filter="test"></table>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="withdraw">撤回</a>
+</script>
+<script type="text/javascript" src="/js/jquery-1.12.4.js"></script>
+<script src="/layui/layui.js"></script>
+<script type="text/javascript">
+    layui.use('table', function(){
+        var table = layui.table;
+        table.render({
+            elem: '#test'
+            ,url:'/rest/findOwnRequest'
+            ,title: '用户数据表'
+            ,width:1369
+            ,cols: [
+                [
+                {field:'restId', title:'编号', width:80, fixed: 'left', unresize: true, sort: true}
+                ,{field:'staffName', title:'姓名', width:120, edit: 'text'}
+                ,{field:'nowDate', title:'当天日期', width:120, edit: 'text', sort: true}
+                ,{field:'restDate', title:'请假日期', width:120}
+                ,{field:'formatStatus', title:'请假申请状态', width:100}
+                ,{field:'day', title:'星期', width:80, sort: true}
+                ,{field:'reason', title:'原因', width:600}
+                ,{fixed: 'right', title:'操作', toolbar:'#barDemo',width:140}
+            ]
+            ]
+            ,page: true
+        });
+
+        $("#submit").click(function () {
+            var restInfo=$("#restForm").serialize()
+            $.ajax({
+                url:"/rest/addRequest",
+                data:restInfo,
+                dataType:'json',
+                type:"post",
+                success:function (msg) {
+                    if(msg.code==0){
+                        alert("申请成功！")
+                    }
+                }
+            })
+        })
+
+        //监听行工具事件
+        table.on('tool(test)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'withdraw'){
+                layer.confirm('真的撤回么', function(index){
+                    if(data.formatStatus=='待处理'){
+                        $.ajax({
+                            url:'/rest/restRequestWithdraw',
+                            type:'post',
+                            data:{'restId':data.restId},
+                            dataType:'json',
+                            success:function(msg){
+                                if(msg.code===0){
+                                    alert("撤回成功")
+                                    obj.del();
+                                    layer.close(index);
+                                }else{
+                                    alert("请求已被处理，撤回失败")
+                                }
+                            }
+                        })
+                    }else{
+                        alert("申请已经被处理，无法撤回")
+                    }
+
+                });
+            }
+        });
+    })
+</script>
+</body>
+</html>

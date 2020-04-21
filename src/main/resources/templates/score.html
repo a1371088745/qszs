@@ -2,9 +2,94 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>学生分数</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/layui/css/layui.css"  media="all">
 </head>
 <body>
-    <h1>assdd</h1>
+    <input type="text" name="className" id="className" style="display: none">
+    <input type="text" name="count" id="count" style="display: none">
+    <table class="layui-hide" id="t" lay-filter="test"></table>
+    <div class="layui-inline" style="display: none" id="scoreEdit">
+        <div class="layui-form-item"  style="text-align: center">
+        <label class="layui-form-label">分数</label>
+        <div class="layui-input-inline">
+            <input name="score"
+                   autocomplete="off" class="layui-input" type="text" id="score">
+        </div>
+        </div>
+        <div class="layui-form-item" style="text-align: center;">
+            <button type="button" class="layui-btn" id="submit"><span class='layui-icon'>&#xe609;</span>确定</button>
+        </div>
+    </div>
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-xs" lay-event="addScore" >添加分数</a>
+    </script>
+    <script src="/js/common.js"></script>
+    <script src="/layui/layui.all.js" charset="utf-8"></script>
+<script>
+    var $=layui.$
+    if($("#className").val()==""){
+        var className = g_getQueryString("className");
+        $("#className").val(className)
+    }
+    if($("#count").val()==""){
+        var count = g_getQueryString("count");
+        $("#count").val(count)
+    }
+
+    layui.use(['table','form'], function() {
+        var table = layui.table;
+        //方法级渲染
+        var tableIns = table.render({
+            elem: '#t'
+            , url: '/score/findScore?className='+$("#className").val()+"&count="+$("#count").val()
+            , cols: [
+                [
+                    {type: 'checkbox', fixed: 'left'}
+                    , {field: 'stuId', title: '学生编号', width: 120, fixed: 'left', unresize: true, sort: true}
+                    , {field: 'stuName', title: '姓名', width: 180, edit: 'text'}
+                    , {field: 'stuSex', title: '性别', width: 100, edit: 'text', sort: true}
+                    , {field: 'stuAge', title: '年龄', width: 100}
+                    , {field: 'stuTel', title: '联系电话', width: 150}
+                    , {field: 'number', title: '考试次数', width: 200}
+                    , {field: 'score', title: '分数', width: 280}
+                    ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:200}
+                ]
+            ]
+
+        });
+
+        table.on('tool(test)', function(obj) {
+            var data = obj.data;
+            if (obj.event === 'addScore') {
+                var mainIndex=layer.open({
+                    type:1,
+                    title:'添加分数',
+                    skin: 'layui-layer-molv', //加上边框
+                    area: ['26%', '23%'], //宽高
+                    content:$("#scoreEdit"),
+                    success:function () {
+                        $("#submit").click(function () {
+                            $.ajax({
+                                url:"/score/addScore",
+                                data:{"stuId":data.stuId,"score":$("#score").val(),"count":$("#count").val()},
+                                type:"post",
+                                dataType:"json",
+                                success:function () {
+                                   layer.close(mainIndex)
+                                    tableIns.reload();
+                                }
+                            })
+
+                        })
+                    }
+                })
+            }
+        })
+    })
+</script>
 </body>
 </html>

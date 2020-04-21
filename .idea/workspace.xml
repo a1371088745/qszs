@@ -2,33 +2,46 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7317ead0-cf50-429c-8a8e-a9acce6f8818" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__joda_time_joda_time_2_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wt/controller/RestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wt/service/RestRequestService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wt/service/impl/RestRequestServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wt/vo/RestRequestVo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/common.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/restRequest.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/wt/controller/RestController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/wt/service/RestRequestService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/wt/service/impl/RestRequestServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/wt/vo/RestRequestVo.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/static/js/common.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/templates/restRequest.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wt/controller/ClController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wt/controller/ClController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wt/controller/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wt/controller/StudentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wt/mapper/ClMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wt/mapper/ClMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wt/mapper/ClMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wt/mapper/ClMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wt/mapper/StudentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wt/mapper/StudentMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wt/mapper/StudentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wt/mapper/StudentMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wt/service/ClService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wt/service/ClService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wt/service/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wt/service/StudentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wt/service/impl/ClServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wt/service/impl/ClServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wt/service/impl/StudentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wt/service/impl/StudentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qszs.iml" beforeDir="false" afterPath="$PROJECT_DIR$/qszs.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wt/controller/ScoreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wt/controller/ScoreController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wt/mapper/RestRequestMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wt/mapper/RestRequestMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wt/mapper/RestRequestMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wt/mapper/RestRequestMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wt/mapper/ScoreMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wt/mapper/ScoreMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wt/mapper/ScoreMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wt/mapper/ScoreMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wt/service/ScoreService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wt/service/ScoreService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wt/service/impl/ScoreServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wt/service/impl/ScoreServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wt/shiroConfig/ShiroConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wt/shiroConfig/ShiroConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wt/util/PageUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wt/util/PageUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/wt/controller/ClController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wt/controller/ClController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/wt/controller/StudentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wt/controller/StudentController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/wt/mapper/ClMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wt/mapper/ClMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/wt/mapper/ClMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wt/mapper/ClMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/wt/mapper/StudentMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wt/mapper/StudentMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/wt/mapper/StudentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wt/mapper/StudentMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/wt/service/ClService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wt/service/ClService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/wt/service/StudentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wt/service/StudentService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/wt/service/impl/ClServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wt/service/impl/ClServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/wt/service/impl/StudentServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wt/service/impl/StudentServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/inputScoreChoose.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/inputScoreChoose.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/score.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/score.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wt/controller/ScoreController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wt/controller/ScoreController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wt/mapper/RestRequestMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wt/mapper/RestRequestMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wt/mapper/RestRequestMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wt/mapper/RestRequestMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wt/mapper/ScoreMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wt/mapper/ScoreMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wt/mapper/ScoreMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wt/mapper/ScoreMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wt/service/ScoreService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wt/service/ScoreService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/wt/service/impl/ScoreServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wt/service/impl/ScoreServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/wt/shiroConfig/ShiroConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wt/shiroConfig/ShiroConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/wt/util/PageUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/wt/util/PageUtils.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/inputScoreChoose.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/inputScoreChoose.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/score.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/score.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,10 +54,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
         <option value="mapper.xml" />
         <option value="HTML File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -85,29 +98,29 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/com/wt/service" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\qszs\src\main\resources\static\js" />
+      <recent name="E:\qszs\src\main\resources\templates" />
+      <recent name="E:\qszs\src\main\resources\static" />
+      <recent name="E:\qszs\src\main\java\com\wt\util" />
+      <recent name="E:\qszs\src\main\resources\static\photo" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.wt.entity" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\qszs\src\main\resources\templates" />
       <recent name="E:\qszs\src\main\resources\static" />
       <recent name="E:\qszs\src\main\resources\static\resources" />
       <recent name="E:\qszs\src\main\java\com\wt\mapper" />
       <recent name="E:\qszs\src\main\resources\com\wt\mapper" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.wt.entity" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\qszs\src\main\resources\templates" />
-      <recent name="E:\qszs\src\main\resources\static" />
-      <recent name="E:\qszs\src\main\java\com\wt\util" />
-      <recent name="E:\qszs\src\main\resources\static\js" />
-      <recent name="E:\qszs\src\main\resources\static\photo" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -238,7 +251,9 @@
       <workItem from="1586854056243" duration="12462000" />
       <workItem from="1586932141642" duration="5569000" />
       <workItem from="1586962568969" duration="574000" />
-      <workItem from="1587044682978" duration="9167000" />
+      <workItem from="1587044682978" duration="9477000" />
+      <workItem from="1587305519833" duration="7526000" />
+      <workItem from="1587475610963" duration="13783000" />
     </task>
     <task id="LOCAL-00001" summary="qszs实践版">
       <created>1584374383858</created>
@@ -275,7 +290,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586881955488</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="qszs实践版">
+      <created>1587054229947</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1587054229947</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -347,10 +369,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="71" key="#Project_Structure/0.0.1536.824@0.0.1536.824" timestamp="1585649170211" />
-    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser" timestamp="1587052156879">
+    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser" timestamp="1587491318684">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1587052156879" />
+    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1587491318684" />
     <state x="548" y="271" width="439" height="292" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1584350515284">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -359,50 +381,50 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1586540863293" />
-    <state x="372" y="8" key="CommitChangelistDialog2" timestamp="1586881950971">
+    <state x="372" y="8" key="CommitChangelistDialog2" timestamp="1587054226524">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="372" y="8" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1586881950971" />
-    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1586794864839">
+    <state x="372" y="8" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1587054226524" />
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1587054250425">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1586794864839" />
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1586876137137">
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1587054250425" />
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1587306358816">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1586876137137" />
-    <state width="1238" height="207" key="GridCell.Tab.0.bottom" timestamp="1587054023294">
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1587306358816" />
+    <state width="1238" height="207" key="GridCell.Tab.0.bottom" timestamp="1587491899606">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1238" height="207" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587054023294" />
-    <state width="1238" height="207" key="GridCell.Tab.0.center" timestamp="1587054023294">
+    <state width="1238" height="207" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587491899606" />
+    <state width="1238" height="207" key="GridCell.Tab.0.center" timestamp="1587491899606">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1238" height="207" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1587054023294" />
-    <state width="1238" height="207" key="GridCell.Tab.0.left" timestamp="1587054023294">
+    <state width="1238" height="207" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1587491899606" />
+    <state width="1238" height="207" key="GridCell.Tab.0.left" timestamp="1587491899605">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1238" height="207" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1587054023294" />
-    <state width="1238" height="207" key="GridCell.Tab.0.right" timestamp="1587054023294">
+    <state width="1238" height="207" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1587491899605" />
+    <state width="1238" height="207" key="GridCell.Tab.0.right" timestamp="1587491899606">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1238" height="207" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1587054023294" />
-    <state width="1238" height="207" key="GridCell.Tab.1.bottom" timestamp="1587054023294">
+    <state width="1238" height="207" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1587491899606" />
+    <state width="1238" height="207" key="GridCell.Tab.1.bottom" timestamp="1587491899606">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1238" height="207" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587054023294" />
-    <state width="1238" height="207" key="GridCell.Tab.1.center" timestamp="1587054023294">
+    <state width="1238" height="207" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587491899606" />
+    <state width="1238" height="207" key="GridCell.Tab.1.center" timestamp="1587491899606">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1238" height="207" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1587054023294" />
-    <state width="1238" height="207" key="GridCell.Tab.1.left" timestamp="1587054023294">
+    <state width="1238" height="207" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1587491899606" />
+    <state width="1238" height="207" key="GridCell.Tab.1.left" timestamp="1587491899606">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1238" height="207" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1587054023294" />
-    <state width="1238" height="207" key="GridCell.Tab.1.right" timestamp="1587054023294">
+    <state width="1238" height="207" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1587491899606" />
+    <state width="1238" height="207" key="GridCell.Tab.1.right" timestamp="1587491899606">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1238" height="207" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1587054023294" />
+    <state width="1238" height="207" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1587491899606" />
     <state width="1238" height="207" key="GridCell.Tab.2.bottom" timestamp="1586881658736">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -419,6 +441,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1238" height="207" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1586881658736" />
+    <state x="299" y="67" key="Maven.ArtifactSearchDialog" timestamp="1587489060666">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="299" y="67" key="Maven.ArtifactSearchDialog/0.0.1536.824@0.0.1536.824" timestamp="1587489060666" />
     <state x="559" y="123" key="RollbackChangesDialog" timestamp="1586794904308">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -431,18 +457,18 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="587" y="116" key="VCS.ChangeListViewerDialog/0.0.1536.824@0.0.1536.824" timestamp="1586498348861" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1586882039567">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1587054255942">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1586882039567" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1587054255942" />
     <state x="565" y="190" key="chooseDestDirectoryDialog" timestamp="1582820025734">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="565" y="190" key="chooseDestDirectoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1582820025734" />
-    <state x="461" y="220" key="com.intellij.ide.util.TipDialog" timestamp="1587044685846">
+    <state x="461" y="220" key="com.intellij.ide.util.TipDialog" timestamp="1587305525053">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="461" y="220" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1587044685846" />
+    <state x="461" y="220" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1587305525053" />
     <state x="562" y="329" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1586794753940">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

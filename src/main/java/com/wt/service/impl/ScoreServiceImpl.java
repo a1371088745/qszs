@@ -15,4 +15,9 @@ public class ScoreServiceImpl implements ScoreService {
     public List<StudentScoreVo> findScore(String className, Integer count) {
         return scoreMapper.findScore(className,count);
     }
+
+    @Override
+    public Integer addScore(Integer stuId,Integer score,Integer count) {
+        return scoreMapper.addScore(stuId,score,count);
+    }
 }
