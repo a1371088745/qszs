@@ -15,4 +15,6 @@ public interface StaffMapper {
 	public List<Staff> findTeacher(@Param("classType") String classType);
 	//根据名字查id
 	public Integer findStaffId(@Param("staffName") String staffName);
+
+    public List<Staff> selectAllTeacher();
 }

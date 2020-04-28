@@ -3,6 +3,7 @@ package com.wt.service.impl;
 import com.wt.entity.Student;
 import com.wt.mapper.ClMapper;
 import com.wt.mapper.GroupMapper;
+import com.wt.mapper.ScoreMapper;
 import com.wt.mapper.StudentMapper;
 import com.wt.service.StudentService;
 import com.wt.util.PageUtils;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -19,6 +21,8 @@ public class StudentServiceImpl implements StudentService {
     private ClMapper clMapper;
     @Autowired
     private GroupMapper groupMapper;
+    @Autowired
+    private ScoreMapper scoreMapper;
     @Override
     public List<Student> findStudents(String name, String className, PageUtils pageUtils) {
         return studentMapper.findStudents(name,className,pageUtils);
@@ -62,8 +66,16 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    @Transactional
     public Integer addStu(Student stu,Integer classId) {
-        return studentMapper.addStu(stu,classId);
+        ArrayList<Integer> counts = new ArrayList<>();
+        counts.add(1);
+        counts.add(2);
+        counts.add(3);
+        counts.add(4);
+        studentMapper.addStu(stu,classId);
+        clMapper.changePeopleCount(classId,1);
+        return scoreMapper.initializeScore(stu, counts);
     }
 
     @Override

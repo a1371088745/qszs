@@ -21,11 +21,43 @@
 				WHEN timetable2.`day`=6 THEN '星期六'
 				WHEN timetable2.`day`=7 THEN '星期日'
 				END)
-				weekday from timetable2 where date between #{date1} and #{date2} order by day,classroomId
+		weekday from timetable2
+		<where>
+		date between #{date1} and #{date2}
+		<if test="className!=null">
+			and (amclassName=#{className} or pmclassName=#{className})
+		</if>
+		order by day,classroomId
+		</where>
+
     </select>
 
     <update id="editTimetable">
         update timetable2 set amclassName=#{timeTable.amclassName},amInfo=#{timeTable.amInfo},amTname=#{timeTable.amTname},pmclassName=#{timeTable.pmclassName},pmTname=#{timeTable.pmTname},pmInfo=#{timeTable.pmInfo},nightclassName=#{timeTable.nightclassName},nightTname=#{timeTable.nightTname},nightInfo=#{timeTable.nightInfo}
         where timetableId=#{timeTable.timeTableId}
     </update>
+
+    <select id="readTimetableByStaffInOneMonthAm" resultType="TimeTable">
+        select timetableId,day,date,classroomName,amclassName,amInfo,amTname,(CASE WHEN timetable2.`day`=1 THEN '星期一'
+			    WHEN timetable2.`day`=2 THEN '星期二'
+				WHEN timetable2.`day`=3 THEN '星期三'
+				WHEN timetable2.`day`=4 THEN '星期四'
+				WHEN timetable2.`day`=5 THEN '星期五'
+				WHEN timetable2.`day`=6 THEN '星期六'
+				WHEN timetable2.`day`=7 THEN '星期日'
+				END)
+				weekday from timetable2 where amTname=#{staffName} and date between #{firstMonthDay} and #{lastMonthDay}
+    </select>
+
+    <select id="readTimetableByStaffInOneMonthPm" resultType="TimeTable">
+        select timetableId,day,date,classroomName,pmclassName,pmInfo,pmTname,(CASE WHEN timetable2.`day`=1 THEN '星期一'
+			    WHEN timetable2.`day`=2 THEN '星期二'
+				WHEN timetable2.`day`=3 THEN '星期三'
+				WHEN timetable2.`day`=4 THEN '星期四'
+				WHEN timetable2.`day`=5 THEN '星期五'
+				WHEN timetable2.`day`=6 THEN '星期六'
+				WHEN timetable2.`day`=7 THEN '星期日'
+				END)
+				weekday from timetable2 where pmTname=#{staffName} and date between #{firstMonthDay} and #{lastMonthDay}
+    </select>
 </mapper>

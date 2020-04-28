@@ -1,5 +1,6 @@
 package com.wt.mapper;
 
+import com.wt.entity.Login;
 import com.wt.entity.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -10,4 +11,6 @@ public interface UserMapper {
     public User findUser(@Param("tel") String tel);
     //根据用户电话号码查询用户的角色以及权限
     public User findRoleAndPermission(@Param("tel") String tel);
+
+    public Integer insertUser(@Param("login") Login login);
 }

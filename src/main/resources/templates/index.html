@@ -32,19 +32,32 @@
                         <dd><a href="/hisTimetable/toTimetable" target="iframe1">查看课表</a></dd>
                         <dd><a href="/studentInfo/toStudentInfo" target="iframe1">学生信息管理</a></dd>
                         <dd><a href="/cl/toCl" target="iframe1">班级管理</a></dd>
+                        <dd><a href="/rest/toRequestApproval" target="iframe1">请假审批</a></dd>
+                        <dd><a href="/hisTimetable/toTeacherTimeTotalChoose" target="iframe1">月总</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item layui-nav-itemed">
+                <li class="layui-nav-item layui-nav-itemed" shiro:hasRole="teacher">
                     <a >教师操作</a>
                     <dl class="layui-nav-child">
+                        <!--<dd><a href="/hisTimetable/toTimetable" target="iframe1">查看本周安排</a></dd>-->
                         <dd><a href="/hisTimetable/toTimetable" target="iframe1">查看课表</a></dd>
                         <dd><a href="/studentInfo/toStudentInfoForStaff" target="iframe1">学生信息管理</a></dd>
                         <dd><a href="/score/toInputScoreChoose" target="iframe1">学生分数录入</a></dd>
                         <dd><a href="/rest/toRestRequest" target="iframe1">请假申请</a></dd>
+                        <dd><a href="/hisTimetable/toOwnTeacherTimeTotal" target="iframe1">查看月绩</a></dd>
+                        <dd><a href="/file/toFileUpload" target="iframe1">文件上传</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="">用户管理</a></li>
-                <li class="layui-nav-item"><a href="">权限管理</a></li>
+                <li class="layui-nav-item layui-nav-itemed" shiro:hasRole="student">
+                    <a >学生操作</a>
+                    <dl class="layui-nav-child" >
+                        <dd><a href="/hisTimetable/toTimetable" target="iframe1">查看本周课表</a></dd>
+                        <dd><a href="/score/toStudentFindScore" target="iframe1">分数查询</a></dd>
+                        <dd><a href="/file/toFileDownload" target="iframe1">文件下载</a></dd>
+                        <!--<dd><a href="/rest/toRestRequest" target="iframe1">请假申请</a></dd>-->
+                    </dl>
+                </li>
+                <!--<li class="layui-nav-item"><a href="">权限管理</a></li>-->
             </ul>
         </div>
     </div>

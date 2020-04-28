@@ -69,6 +69,7 @@ public class TimeTableServiceImpl implements TimeTableService {
 			int StaffId = givenLessonMapper.selectStaffId(cl.getClassId());
 			hashMap.put(StaffId, RestDays); 
 		}
+		System.out.println(hashMap.get(7));
 		for(Integer i=1;i<=7;i++) {
 			for (Cl cl:allClass) {
 				cl.setFlag(false);
@@ -220,6 +221,7 @@ public class TimeTableServiceImpl implements TimeTableService {
 			}
 		}
 		timeTableMapper.truncate();
+		requestMapper.clearRequest();
 		hisTimetableMapper.insertTimetables(timeTables);
 		timeTableMapper.insertTbs(timeTables);
 		return timeTables;

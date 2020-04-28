@@ -7,4 +7,6 @@ import java.util.List;
 public interface StaffService {
     //查询所有教员
     public List<Staff> findTeacher(String classType);;
+
+    public List<Staff> selectAllTeacher();
 }

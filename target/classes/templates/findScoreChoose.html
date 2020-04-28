@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选择次数</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/layui/css/layui.css"  media="all">
+</head>
+<body>
+<form class="layui-form layui-form-pane"  lay-filter="change" id="stuInfoForm" style="text-align: center;padding-top:300px">
+    <div class="layui-form-item">
+        <div class="layui-inline" lay-filter="myDiv">
+            <label class="layui-form-label">次数</label>
+            <div class="layui-input-inline">
+                <select name="count" id="count" lay-filter="select1">
+                    <option>请选择</option>
+                    <option>第一次</option>
+                    <option>第二次</option>
+                    <option>第三次</option>
+                    <option>第四次</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item" style="text-align: center;">
+        <button type="button" class="layui-btn" id="submit"><span class='layui-icon'>&#xe609;</span>确定</button>
+    </div>
+</form>
+
+<script src="/layui/layui.all.js" charset="utf-8"></script>
+<script>
+    var $=layui.$
+    var count=$("#count").find("option[selected]");
+    $("#submit").click(function () {
+        alert(count)
+        window.location.href="/score/toTeacherTimeTotal?staffName="+count;
+    })
+</script>
+</body>
+</html>

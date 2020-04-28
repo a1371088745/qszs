@@ -16,4 +16,10 @@ public interface RestRequestMapper {
 	public Integer addRequest(@Param("restRequestVo") RestRequestVo restRequestVo, @Param("staffId") Integer staffId);
 
     public Integer restRequestWithdraw(@Param("restId") Integer restId);
+
+    public Integer agreeRequest(@Param("restId") Integer restId);
+
+	public Integer refuseRequest(@Param("restId") Integer restId);
+
+	public Integer clearRequest();
 }

@@ -20,4 +20,13 @@ public class ScoreServiceImpl implements ScoreService {
     public Integer addScore(Integer stuId,Integer score,Integer count) {
         return scoreMapper.addScore(stuId,score,count);
     }
+
+    @Override
+    public List<StudentScoreVo> studentFindScore(String stuTel) {
+        List<StudentScoreVo> studentScoreVos = scoreMapper.studentFindScore(stuTel);
+        if(studentScoreVos==null){
+            return null;
+        }
+        return studentScoreVos;
+    }
 }

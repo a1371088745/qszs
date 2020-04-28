@@ -51,24 +51,28 @@
     layui.use(['form', 'layedit', 'laydate'], function(){
         $("#sendVerifyCode").click(function(){
             var tel = $("#tel").val();//取电话框值
-            $.ajax({
-                url: "/register/sendCode",
-                type: "post",
-                data: {"tel":tel},
-                dataType: "json",
-                success: function (obj) {
-                    if (obj.code == 0) {
-                        layer.alert(obj.msg,{icon:1,time:5000})
-                    }else if(obj.code==-1){
-                        layer.alert(obj.msg,{icon:1,time:5000})
-                    }else if(obj.code==-2){
-                        layer.alert(obj.msg,{icon:1,time:5000})
+            if(tel.length!=11){
+                alert("手机号码错误")
+            }else {
+                $.ajax({
+                    url: "/register/sendCode",
+                    type: "post",
+                    data: {"tel": tel},
+                    dataType: "json",
+                    success: function (obj) {
+                        if (obj.code == 0) {
+                            layer.alert(obj.msg, {icon: 1, time: 5000})
+                        } else if (obj.code == -1) {
+                            layer.alert(obj.msg, {icon: 1, time: 5000})
+                        } else if (obj.code == -2) {
+                            layer.alert(obj.msg, {icon: 1, time: 5000})
+                        }
+                    },
+                    error: function () {
+                        layer.alert("发送失败")
                     }
-                },
-                error: function () {
-                    layer.alert("发送失败")
-                }
-            })
+                })
+            }
         })
 
         $("#sbm").click(function () {

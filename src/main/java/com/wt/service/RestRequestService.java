@@ -12,4 +12,8 @@ public interface RestRequestService {
     public Integer addRequest(RestRequestVo restRequestVo);
 
     public Integer restRequestWithdraw(Integer restId);
+
+    public Integer agreeRequest(Integer restId);
+
+    public Integer refuseRequest(Integer restId);
 }

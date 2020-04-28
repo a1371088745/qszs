@@ -47,7 +47,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/staff/**","authc");
         filterChainDefinitionMap.put("/score/toInputScoreChoose","roles[teacher]");
         filterChainDefinitionMap.put("/score/findScore","roles[teacher]");
-        filterChainDefinitionMap.put("/leave/toLeaveRequest","roles[teacher]");
+        filterChainDefinitionMap.put("/rest/toRestRequest","roles[teacher]");
         // 静态资源放行
         filterChainDefinitionMap.put("/image/**", "anon");
         filterChainDefinitionMap.put("/layui/**","anon");

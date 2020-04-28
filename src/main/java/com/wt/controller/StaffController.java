@@ -25,4 +25,11 @@ public class StaffController {
         }
         return JsonData.buildSuccess(teachers,0);
     }
+
+    @RequestMapping("/selectAllTeacher")
+    @ResponseBody
+    public JsonData selectAllTeacher(){
+        List<Staff> staffs = staffService.selectAllTeacher();
+        return JsonData.buildSuccess(staffs);
+    }
 }

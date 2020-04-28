@@ -23,4 +23,7 @@
     <select id="findStaffId" resultType="Integer">
         select staffId from staff where staffName=#{staffName}
     </select>
+    <select id="selectAllTeacher" resultType="Staff">
+        select staff.* from staff where staff.position='JAVA教员' or staff.position='UI教员'
+    </select>
   </mapper>

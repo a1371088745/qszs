@@ -23,4 +23,5 @@ public interface StudentMapper {
     public Integer addStu(@Param("stu") Student stu,@Param("classId") Integer classId);
 
     List<Student> findStudentsByStaffTel(@Param("staffTel") String staffTel);
+
 }

@@ -28,4 +28,8 @@
         SELECT u.*,r.*,p.* FROM users u INNER JOIN userrole ur ON u.userId=ur.userId INNER JOIN role r ON ur.roleId=r.roleId
         INNER JOIN rolepermission rp ON r.roleId=rp.roleId INNER JOIN permission p ON rp.permissionId=p.permissionId where u.tel=#{tel}
     </select>
+
+    <insert id="insertUser">
+        insert into users(tel) values (#{login.tel})
+    </insert>
 </mapper>

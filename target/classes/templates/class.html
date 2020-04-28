@@ -294,7 +294,7 @@
             }else if(obj.event==='add'){
                 layer.open({
                     type: "1",
-                    title: "修改班级",
+                    title: "添加学生",
                     skin: 'layui-layer-molv', //加上边框
                     area: ['50%', '28%'], //宽高
                     content: $("#addStuInfo"),
@@ -303,23 +303,28 @@
                             var student=$("#stuInfoForm").serialize()
                             var classId=data.classId
                             var param=$.param({"classId":classId})+"&"+student
-                            $.ajax({
-                                url:"/studentInfo/addStu",
-                                data:param,
-                                type:"post",
-                                dataType:"json",
-                                success:function (msg) {
-                                    if(msg.code==0){
-                                        alert(msg.msg)
-                                        if(!confirm("是否继续添加?")){
-                                            location.reload()
+                            var tel=$("#tel").val()
+                            if(tel.length!=11){
+                                alert("手机号码错误")
+                            }else {
+                                $.ajax({
+                                    url: "/studentInfo/addStu",
+                                    data: param,
+                                    type: "post",
+                                    dataType: "json",
+                                    success: function (msg) {
+                                        if (msg.code == 0) {
+                                            alert(msg.msg)
+                                            if (!confirm("是否继续添加?")) {
+                                                location.reload()
+                                            }
                                         }
-                                    }
-                                },
-                                error:function () {
+                                    },
+                                    error: function () {
                                         alert("添加学生失败")
-                                }
-                            })
+                                    }
+                                })
+                            }
                         })
                     }
                 })

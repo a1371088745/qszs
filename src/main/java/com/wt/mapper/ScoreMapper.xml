@@ -10,4 +10,13 @@
     <update id="addScore">
         update score set score=#{score} where stuId=#{stuId} and number=#{count}
     </update>
+    <select id="studentFindScore" resultType="com.wt.vo.StudentScoreVo">
+        select stu.stuId,stu.stuName,stu.stuSex,stu.stuAge,stu.stuTel,sc.number,sc.score from student stu left join score sc
+        on stu.stuId=sc.stuId where stu.stuTel=#{stuTel}
+    </select>
+    <insert id="initializeScore">
+        insert  into score(stuId,number,score) values <foreach collection="counts" item="count" separator=",">
+        (#{stu.stuId},#{count},0)
+    </foreach>
+    </insert>
 </mapper>

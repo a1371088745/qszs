@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>Layui</title>
+    <meta name="renderer" content="webkit">
+    <script type="text/javascript" src="/js/table2excel.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+</head>
+<body>
+<p th:text="${staffName}" style="display: none" id="staffName">default message</p>
+<table class="layui-hide" id="t" lay-filter="test"></table>
+<button id="b1">导出excel表</button>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit" >编辑</a>
+</script>
+<script src="/js/common.js"></script>
+<script src="/layui/layui.all.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<!--<script type="text/javascript" src="/js/jquery-1.12.4.js"></script>-->
+<script>
+    var $=layui.$
+    var staffName=g_getQueryString("staffName");
+    if(staffName==null){
+        staffName=$("#staffName").text();
+    }
+    layui.use('table', function(){
+        var table = layui.table;
+        table.render({
+            elem:'#t'
+            ,url:'/hisTimetable/readTimetableByStaffInOneMonth?staffName='+staffName
+            ,cols: [
+                [
+                    {field:'weekday',title:"星期",width:150,rowspan:2,align:'center'}
+                    ,{field:'date', title:'日期', width:180,rowspan:2}
+                    ,{field:'classroomName', title:'机房', width:150, rowspan:2}
+                    ,{align:'center',title:'上午',colspan:3}
+                    ,{align:'center',title:'下午',colspan:3}
+                    ,{align:'center',title:'晚上',colspan:3}
+                    ,{fixed:'right', title:'操作', toolbar:'#barDemo',width:140,rowspan:2,colspan:1}
+                ],[
+                    {field:'amclassName', title:'班级'}
+                    ,{field:'amInfo', title:'课程内容'}
+                    ,{field:'amTname', title:'教师姓名'}
+                    ,{field:'pmclassName', title:'班级'}
+                    ,{field:'pmInfo', title:'课程内容'}
+                    ,{field:'pmTname', title:'教师姓名'}
+                    ,{field:'nightclassName', title:'班级'}
+                    ,{field:'nightInfo', title:'课程内容'}
+                    ,{field:'nightTname', title:'教师姓名'}
+                    ,{field:'timeTableId', title:"课程id",hide:true}
+                ]
+            ],
+            loading:true,
+            done:function(res, curr, count) {
+                let header_tr = $("#t").next().find(".layui-table-header").find("tr");
+                let body_tr = $("#t").next().find(".layui-table-body").find("tr");
+                let header_html = "";
+                let body_html = "";
+                // 获取表头html，包括单元格的合并
+                $.each(header_tr,function (i,tr) {
+                    let header_th = $(tr).find("th");
+                    header_html += "<tr>";
+                    $.each(header_th,function (j,th) {
+                        let rowspan_num = $(th).attr("rowspan");// 行合并数
+                        let colspan_num = $(th).attr("colspan");// 列合并数
+                        if (rowspan_num && !colspan_num){// 只有行合并时
+                            header_html += '<th rowspan= "'+ rowspan_num +'">';
+                        } else if (colspan_num && !rowspan_num){// 只有列合并时
+                            header_html += '<th colspan= "'+ colspan_num +'">';
+                        } else if (rowspan_num && colspan_num){// 行列合并均有时
+                            header_html += '<th rowspan= "'+ rowspan_num +'" colspan="'+ colspan_num +'">';
+                        } else {// 没有发生单元格合并
+                            header_html += '<th>';
+                        }
+                        header_html += $(th).children().children().text() + '</th>';// 获取表头名称并拼接th标签
+                    })
+                    header_html += '</tr>';
+                })
+                // 获取表格body数据
+                $.each(body_tr,function (i,tr) {
+                    let body_td = $(tr).find("td");
+                    body_html += '<tr>';
+                    $.each(body_td,function (j,td) {
+                        body_html += '<td>' + $(td).children().text() + '</td>';
+                    })
+                    body_html += '</tr>';
+                })
+                $("#t").append(header_html).append(body_html);
+                //$("#tableId").hide();
+            }
+        });
+    })
+
+
+    $("#b1").click(function(){
+        var table2excel = new Table2Excel();
+        table2excel.export($("#t"), "your filename");
+    })
+</script>
+
+</body>
+</html>

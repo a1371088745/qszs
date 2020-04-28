@@ -188,10 +188,12 @@
                             $("#classifyId").append("<option value='在读'>在读</option>")
                         }
                         $.ajax({
-                            url:"/cl/selectAllCl",
+                            url:"/cl/selectCl",
                             type:"post",
                             dataType:"json",
                             success:function (msg) {
+                                $("#classifyClass").empty();
+                                $("#classifyClass").append("<option id='first'></option>")
                                 $("#first").text(data.className);
                                 $("#first").attr("value",data.className)
                                for(var i=0;i<msg.data.length;i++){

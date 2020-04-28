@@ -26,6 +26,11 @@ public class RestController {
         return "restRequest";
     }
 
+    @RequestMapping("/toRequestApproval")
+    public String toRequestApproval(){
+        return "requestApproval";
+    }
+
     @RequestMapping("/findOwnRequest")
     @ResponseBody
     public JsonData findOwnRequest(HttpSession session){
@@ -48,6 +53,26 @@ public class RestController {
     @ResponseBody
     public JsonData restRequestWithdraw(Integer restId){
         Integer integer = restRequestService.restRequestWithdraw(restId);
+        return JsonData.buildSuccess(integer);
+    }
+
+    @RequestMapping("/agreeRequest")
+    @ResponseBody
+    public JsonData agreeRequest(Integer restId){
+        Integer integer = restRequestService.agreeRequest(restId);
+        if(integer==0){
+            return JsonData.buildError("申请已被处理过，无法重复处理");
+        }
+        return JsonData.buildSuccess(integer);
+    }
+
+    @RequestMapping("/refuseRequest")
+    @ResponseBody
+    public JsonData refuseRequest(Integer restId){
+        Integer integer = restRequestService.refuseRequest(restId);
+        if(integer==0){
+            return JsonData.buildError("申请已被处理过，无法重复处理");
+        }
         return JsonData.buildSuccess(integer);
     }
 }

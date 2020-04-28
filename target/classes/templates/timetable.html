@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="utf-8">
     <title>Layui</title>
@@ -11,6 +11,18 @@
     <link rel="stylesheet" href="/layui/css/layui.css" media="all">
 </head>
 <body>
+<form class="layui-form layui-form-pane"  lay-filter="change" id="chooseForm" style="text-align: center">
+    <div class="layui-form-item">
+        <div class="layui-inline" lay-filter="myDiv">
+            <label class="layui-form-label">班级名</label>
+            <div class="layui-input-inline">
+                <select name="classifyClass" id="classifyClass" lay-filter="select1">
+                    <option id="firstClass"></option>
+                </select>
+            </div>
+        </div>
+    </div>
+</form>
 <table class="layui-hide" id="t" lay-filter="test"></table>
 <div style="display:none;padding: 3px" id="editTable">
     <form class="layui-form layui-form-pane"  lay-filter="change" id="stuInfoForm">
@@ -87,7 +99,7 @@
 </div>
 <button id="b1">导出excel表</button>
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="edit" >编辑</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasRole="admin" >编辑</a>
 </script>
 <script src="/layui/layui.all.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
@@ -96,7 +108,7 @@
     var $=layui.$
     layui.use('table', function(){
         var table = layui.table;
-        table.render({
+        var tableIns=table.render({
                 elem:'#t'
                 ,url:'/hisTimetable/readTimetable'
                 ,cols: [
@@ -205,7 +217,55 @@
                 });
             }
         });
+        layui.form.on('select(select1)',function(data){
+           var  className=data.value;
+            table.render({
+                elem: '#t'
+                , url: '/hisTimetable/readTimetable?className='+className
+                , cols: [
+                    [
+                        {field: 'weekday', title: "星期", width: 150, rowspan: 2, align: 'center'}
+                        , {field: 'date', title: '日期', width: 180, rowspan: 2}
+                        , {field: 'classroomName', title: '机房', width: 150, rowspan: 2}
+                        , {align: 'center', title: '上午', colspan: 3}
+                        , {align: 'center', title: '下午', colspan: 3}
+                        , {align: 'center', title: '晚上', colspan: 3}
+                        , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 140, rowspan: 2, colspan: 1}
+                    ], [
+                        {field: 'amclassName', title: '班级'}
+                        , {field: 'amInfo', title: '课程内容'}
+                        , {field: 'amTname', title: '教师姓名'}
+                        , {field: 'pmclassName', title: '班级'}
+                        , {field: 'pmInfo', title: '课程内容'}
+                        , {field: 'pmTname', title: '教师姓名'}
+                        , {field: 'nightclassName', title: '班级'}
+                        , {field: 'nightInfo', title: '课程内容'}
+                        , {field: 'nightTname', title: '教师姓名'}
+                        , {field: 'timeTableId', title: "课程id", hide: true}
+                    ]
+                ]
+            })
+        });
     })
+
+    $.ajax({
+        url:"/cl/selectCl",
+        type:"post",
+        dataType:"json",
+        success:function (msg) {
+            for(var i=0;i<msg.data.length;i++){
+                window.console.log(msg.data[i].className)
+                    let ele=$("<option></option>")
+                    $("#classifyClass").append(ele)
+                    ele.attr('value',msg.data[i].className)
+                    ele.text(msg.data[i].className)
+            }
+            layui.use('form', function(){
+                layui.form.render("select");
+            })
+        }
+    })
+
 
 
     $("#b1").click(function(){

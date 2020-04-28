@@ -16,4 +16,9 @@ public class StaffServiceImpl implements StaffService {
     public List<Staff> findTeacher(String classType) {
         return staffMapper.findTeacher(classType);
     }
+
+    @Override
+    public List<Staff> selectAllTeacher() {
+        return staffMapper.selectAllTeacher();
+    }
 }

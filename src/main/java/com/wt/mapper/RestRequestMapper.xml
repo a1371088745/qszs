@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.wt.mapper.RestRequestMapper">
   <select id="selectRestDay" resultType="Integer">
-  	SELECT r.day FROM restrequest r INNER JOIN givelessons g ON r.`staffId`=g.`staffId` WHERE g.`classId`=#{classId}
+  	SELECT r.day FROM restrequest r INNER JOIN givelessons g ON r.`staffId`=g.`staffId` WHERE g.`classId`=#{classId};
   </select>
     <select id="selectRestRequestByStaffName" resultType="com.wt.vo.RestRequestVo">
         select r.restId,s.staffName,r.nowdate,r.restdate,r.requestStatus,(CASE WHEN r.requestStatus=0 THEN '已通过'
@@ -18,4 +18,13 @@
     <delete id="restRequestWithdraw">
         delete from restrequest where restId=#{restId}
     </delete>
+    <update id="agreeRequest">
+        update restrequest r set requestStatus=0 where r.restId=#{restId}
+    </update>
+    <update id="refuseRequest">
+        update restrequest r set requestStatus=1 where r.restId=#{restId}
+    </update>
+    <update id="clearRequest">
+        truncate table restrequest
+    </update>
   </mapper>

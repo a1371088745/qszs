@@ -31,7 +31,7 @@ public class RestRequestServiceImpl implements RestRequestService {
         Date date = new Date();
         int day = date.getDay();
         System.out.println(date);
-        restRequestVo.setDay(day);
+        restRequestVo.setDay(restRequestVo.getRestDate().getDay());
         restRequestVo.setNowDate(date);
         Integer integer = restRequestMapper.addRequest(restRequestVo, staffId);
         return integer;
@@ -40,5 +40,15 @@ public class RestRequestServiceImpl implements RestRequestService {
     @Override
     public Integer restRequestWithdraw(Integer restId) {
         return restRequestMapper.restRequestWithdraw(restId);
+    }
+
+    @Override
+    public Integer agreeRequest(Integer restId) {
+        return restRequestMapper.agreeRequest(restId);
+    }
+
+    @Override
+    public Integer refuseRequest(Integer restId) {
+        return restRequestMapper.refuseRequest(restId);
     }
 }
